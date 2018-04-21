@@ -1,0 +1,30 @@
+{
+  "name": "upload-app",
+  "version": "1.0.0",
+  "description": "Upload files app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node serve.js",
+    "dev": "node serve.js develop",
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "build": "browserify index.js -o deploy/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reflective-dk/re-upload-app.git"
+  },
+  "author": "code@reflective.dk",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "re-client": "git+ssh://git@github.com/reflective-dk/re-client.git",
+    "re-common-app": "git+ssh://git@github.com/reflective-dk/re-common-app.git",
+    "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.0.0",
+    "browserify": "14.0.0"
+  }
+}
