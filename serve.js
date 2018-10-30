@@ -20,7 +20,7 @@ if (process.argv.length === 3 && process.argv[2] === 'develop') {
   var credentials = {
     username: 'demo@reflective.dk',
     password: 'cyqladwys',
-    context: {"domain": "thisted"} // only for user cred. uploads go to ipfs
+    context: {"domain": "base"} // only for user cred. uploads go to ipfs
   };
   app.get('/app/upload/', serve_utils.test_token(client, credentials, indexpath));
   app.use('/', function(req, res) {

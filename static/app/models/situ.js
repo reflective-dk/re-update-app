@@ -6,6 +6,7 @@ function(webix, promise, ReflectiveClient) {
   webix.attachEvent("onBeforeAjax",
     function(mode, url, data, request, headers, files, promise) {
       headers['authorization'] = client.authorization;
+      headers['context'] = JSON.stringify(client.context);
     }
   );
 

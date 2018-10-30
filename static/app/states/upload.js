@@ -9,21 +9,21 @@ function (webix, stateRouter, situ) {
           {},
           {cols: [
             {},
-            {type:"form", rows: [
+            { type: "form", rows: [
               {
                 id: "uploader",
                 view: "uploader",
                 height: 200,
                 width: 500,
                 value: 'Tryk for udvælgelse af fil, eller træk og slip filen her.',
-                link:"list",
+                link: "list",
                 upload: "/api/process/file-upload",
               },
               {
-                id:"list",
-                view:"list",
-                type:"uploader",
-                autoheight:true,
+                id: "list",
+                view: "list",
+                type: "uploader",
+                autoheight: true,
                 borderless: true,
               }]
               },
