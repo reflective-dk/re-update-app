@@ -1,0 +1,31 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: reflectivedk/circleci-docker-and-gcloud
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Authenticate gcloud
+          command: |
+            echo $GCLOUD_SERVICE_KEY | base64 -d > ${HOME}/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+      - run:
+          name: Build application Docker image
+          command: |
+            gcloud docker -- build -t gcr.io/city-7337/upload-app .
+      - run:
+          name: Run cluster app
+          command: |
+            gcloud docker -- run --name upload-app -d gcr.io/city-7337/upload-app
+      - run:
+          name: Logs
+          command: |
+            docker logs upload-app
+      - deploy:
+          name: Push application Docker image
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              gcloud docker -- push gcr.io/city-7337/upload-app
+            fi
