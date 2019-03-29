@@ -16,7 +16,7 @@ jobs:
           command: |
             gcloud docker -- build -t gcr.io/city-7337/upload-app .
       - run:
-          name: Run cluster app
+          name: Run upload app
           command: |
             gcloud docker -- run --name upload-app -d gcr.io/city-7337/upload-app
       - run:
