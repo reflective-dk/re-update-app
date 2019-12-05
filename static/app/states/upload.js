@@ -13,17 +13,17 @@ function (webix, stateRouter) {
               {
                 id: "uploader",
                 view: "uploader",
-                height: 200,
-                width: 500,
                 value: 'Tryk for udvælgelse af fil, eller træk og slip filen her.',
                 link: "list",
                 upload: "/app/upload/file",
+                css: {'color': 'white'}
               },
               {
                 id: "list",
                 view: "list",
                 type: "uploader",
                 autoheight: true,
+                autowidth: true,
                 borderless: true,
               }]
               },
@@ -34,7 +34,7 @@ function (webix, stateRouter) {
       },
       $oninit: function (view, scope) {
         $$("uploader").attachEvent("onFileUpload", function(item, response) {
-          item.name = 'ref: ' + response.hash;
+          item.name = response.filename;
         });
      }
     },
@@ -43,6 +43,6 @@ function (webix, stateRouter) {
   	},
     activate: function(context) {
   	},
-    route: '/',
+    route: '/upload',
   };
 });
