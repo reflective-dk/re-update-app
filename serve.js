@@ -5,19 +5,22 @@ var path = require('path');
 var app = express();
 
 var indexpath = path.join(__dirname + '/static/index.html');
+
+function fileForward (uploadRequest, uploadResponse) {
+  let headers = Object.assign({}, uploadRequest.headers, {'context': '{"domain":"uploader","chain":"files"}'});
+  let forwardRequest = request({ url: 'http://process:8080/file-upload', headers: headers });
+  uploadRequest.pipe(forwardRequest).pipe(uploadResponse);
+}
+
 if (process.argv.length === 3 && process.argv[2] === 'develop') {
   app.use('/app/upload/static/', express.static('static', {maxAge: 1}));
   app.use('/app/upload/common/', express.static('node_modules/re-common-app', {maxAge: 1}));
+  app.post('/app/upload/file', fileForward);
   
   app.get('/app/upload/', function (request, response) {
     response.sendFile(indexpath);
   });
   
-  app.post('/app/upload/file',function (uploadRequest, uploadResponse) {
-    let headers = Object.assign({}, uploadRequest.headers, {'context': '{"domain":"uploader","chain":"files"}'});
-    let forwardRequest = request({ url: 'http://process:8080/file-upload', headers: headers });
-    uploadRequest.pipe(forwardRequest).pipe(uploadResponse);
-  });
   var host = 'https://test.reflective.dk';
   app.use('/', function(req, res) {
     var url = host + req.url;
@@ -29,6 +32,7 @@ if (process.argv.length === 3 && process.argv[2] === 'develop') {
   };
   app.use('/app/upload/static/', express.static('static', staticConf));
   app.use('/app/upload/common/', express.static('node_modules/re-common-app', staticConf));
+  app.post('/app/upload/file', fileForward);
   
   app.get('/app/upload/', function (request, response) {
     response.sendFile(indexpath);
