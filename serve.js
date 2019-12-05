@@ -6,16 +6,10 @@ var app = express();
 
 var indexpath = path.join(__dirname + '/static/index.html');
 
-function fileForward (uploadRequest, uploadResponse) {
-  let headers = Object.assign({}, uploadRequest.headers, {'context': '{"domain":"uploader","chain":"files"}'});
-  let forwardRequest = request({ url: 'http://process:8080/file-upload', headers: headers });
-  uploadRequest.pipe(forwardRequest).pipe(uploadResponse);
-}
-
 if (process.argv.length === 3 && process.argv[2] === 'develop') {
   app.use('/app/uploader/static/', express.static('static', {maxAge: 1}));
   app.use('/app/uploader/common/', express.static('node_modules/re-common-app', {maxAge: 1}));
-  app.post('/app/uploader/file', fileForward);
+  app.post('/app/uploader/file', sendFiles);
   
   app.get('/app/uploader/', function (request, response) {
     response.sendFile(indexpath);
@@ -32,7 +26,7 @@ if (process.argv.length === 3 && process.argv[2] === 'develop') {
   };
   app.use('/app/uploader/static/', express.static('static', staticConf));
   app.use('/app/uploader/common/', express.static('node_modules/re-common-app', staticConf));
-  app.post('/app/uploader/file', fileForward);
+  app.post('/app/uploader/file', sendFiles);
   
   app.get('/app/uploader/', function (request, response) {
     response.sendFile(indexpath);
@@ -40,3 +34,10 @@ if (process.argv.length === 3 && process.argv[2] === 'develop') {
 }
 
 app.listen(8080);
+
+function sendFiles(uploadRequest, uploadResponse) {
+    console.log('sending files', uploadRequest);
+  let headers = Object.assign({}, uploadRequest.headers, {'context': '{"domain":"uploader","chain":"files"}'});
+  let forwardRequest = request({ url: 'http://process:8080/file-upload', headers: headers });
+  uploadRequest.pipe(forwardRequest).pipe(uploadResponse);
+}
