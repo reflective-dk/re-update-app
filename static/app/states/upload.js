@@ -4,7 +4,7 @@ define([ 'webix', './state-router', 'common/$$' ], function (webix, stateRouter,
         elements: [ {
             template: 'Reflective File Uploader', type:'header'
         }, {
-            view: 'label', label: 'Udvælg filer til sikker overførsel ved at bruge Vælg-knappen eller at trække dem ind i kassen nedenfor.'
+            view: 'label', label: 'Udvælg filer til sikker overførsel ved at bruge Vælg-knappen eller ved at trække dem ind i kassen nedenfor.'
         }, {
             view: 'label', label: 'De valgte filer overføres ved tryk på Overfør-knappen.'
         }, {
