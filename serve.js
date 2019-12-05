@@ -13,11 +13,11 @@ function fileForward (uploadRequest, uploadResponse) {
 }
 
 if (process.argv.length === 3 && process.argv[2] === 'develop') {
-  app.use('/app/upload/static/', express.static('static', {maxAge: 1}));
-  app.use('/app/upload/common/', express.static('node_modules/re-common-app', {maxAge: 1}));
-  app.post('/app/upload/file', fileForward);
+  app.use('/app/uploader/static/', express.static('static', {maxAge: 1}));
+  app.use('/app/uploader/common/', express.static('node_modules/re-common-app', {maxAge: 1}));
+  app.post('/app/uploader/file', fileForward);
   
-  app.get('/app/upload/', function (request, response) {
+  app.get('/app/uploader/', function (request, response) {
     response.sendFile(indexpath);
   });
   
@@ -30,11 +30,11 @@ if (process.argv.length === 3 && process.argv[2] === 'develop') {
   var staticConf = {
     maxAge: 360000 * 1000
   };
-  app.use('/app/upload/static/', express.static('static', staticConf));
-  app.use('/app/upload/common/', express.static('node_modules/re-common-app', staticConf));
-  app.post('/app/upload/file', fileForward);
+  app.use('/app/uploader/static/', express.static('static', staticConf));
+  app.use('/app/uploader/common/', express.static('node_modules/re-common-app', staticConf));
+  app.post('/app/uploader/file', fileForward);
   
-  app.get('/app/upload/', function (request, response) {
+  app.get('/app/uploader/', function (request, response) {
     response.sendFile(indexpath);
   });
 }
