@@ -2,30 +2,29 @@ define([ 'webix', './state-router', 'common/$$' ], function (webix, stateRouter,
     var form = {
 	view: 'form',
         rows: [ {
-	    view: 'uploader',
-            value: 'Upload file',
-	    id: 'file-uploader',
-            name: 'uploader',
-	    link: 'file-list',
-            upload: '/app/uploader/send-files',
-            autosend: false
-	}, {
 	    view: 'list',
             id: 'file-list',
             type: 'uploader',
 	    autoheight: true,
-            borderless: true
-	}, { view: 'button', label: 'Save files', click: function() {
-            $$('file-uploader').send(function(response) {
-                console.log('response', response);
-            });
-        } },
-                {
-            view: 'button', label: 'Get value', click: function() {
-	        var text = this.getParentView().getValues();
-	        text = JSON.stringify(text, '\n').replace(/,/g,',\n\t');
-	        webix.message('<pre>'+text+'</pre>');
-	    }
+            minHeight: 200
+	}, {
+            cols: [ {}, {
+	        view: 'uploader',
+                value: 'Vælg',
+	        id: 'file-uploader',
+                name: 'uploader',
+                css: 'webix_primary',
+                height: 40, width: 100,
+	        link: 'file-list',
+                upload: '/app/uploader/send-files',
+                autosend: false
+	    }, {
+                view: 'button',
+                label: 'Send',
+                css: 'webix_primary',
+                height: 40, width: 100,
+                click: function() { $$('file-uploader').send(); }
+            } ]
         } ]
     };
 
@@ -33,7 +32,11 @@ define([ 'webix', './state-router', 'common/$$' ], function (webix, stateRouter,
         name: 'upload',
         route: '/upload-files',
         template: {
-            $ui: { rows: [ {}, { cols: [ {}, form, {} ] }, {} ] },
+            $ui: { rows: [
+                { gravity: .2 },
+                { cols: [ { gravity: .2 }, form, { gravity: .2 } ] },
+                { gravity: .2 }
+            ] },
             $oninit: function (view, scope) {
                 $$('file-uploader').attachEvent('onFileUpload', function(item, response) {
                     console.log('response', response);
