@@ -1,4 +1,4 @@
-define([ 'webix', './state-router', '../models/situ' ],
+define([ 'webix', './state-router' ],
 function (webix, stateRouter) {
 
   return {
@@ -17,7 +17,7 @@ function (webix, stateRouter) {
                 width: 500,
                 value: 'Tryk for udvælgelse af fil, eller træk og slip filen her.',
                 link: "list",
-                upload: "/api/process/file-upload",
+                upload: "/file-upload",
               },
               {
                 id: "list",

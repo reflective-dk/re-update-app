@@ -13,6 +13,11 @@ if (process.argv.length === 3 && process.argv[2] === 'develop') {
     response.sendFile(indexpath);
   });
   
+  app.post('/file-upload',function (uploadRequest, uploadResponse) {
+    let headers = Object.assign({}, uploadRequest.headers, {'context': '{"domain":"uploader","chain":"files"}'});
+    let forwardRequest = request({ url: 'http://process:8080/file-upload', headers: headers });
+    uploadRequest.pipe(forwardRequest).pipe(uploadResponse);
+  });
   var host = 'https://test.reflective.dk';
   app.use('/', function(req, res) {
     var url = host + req.url;
