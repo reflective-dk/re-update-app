@@ -43,6 +43,7 @@ define([ 'webix', './state-router', 'common/$$' ], function (webix, stateRouter,
                 { gravity: .2 }
             ] },
             $oninit: function (view, scope) {
+                $$('file-uploader').addDropZone($$('file-list').$view);
                 $$('file-uploader').attachEvent('onFileUpload', function(item, response) {
                     console.log('response', response);
                     item.name = 'ref: ' + response.hash;
