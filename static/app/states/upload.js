@@ -4,7 +4,7 @@ define([ 'webix', './state-router', 'common/$$' ], function (webix, stateRouter,
         elements: [ {
             template: 'Reflective File Uploader', type:'header'
         }, {
-            view: 'label', label: 'Udvælg filer til sikker overførsel ved at bruge Vælg-knappen eller trække dem ind nedenfor.'
+            view: 'label', label: 'Udvælg filer til sikker overførsel ved at bruge Vælg-knappen eller at trække dem ind i kassen nedenfor.'
         }, {
             view: 'label', label: 'De valgte filer overføres ved tryk på Overfør-knappen.'
         }, {
@@ -39,9 +39,9 @@ define([ 'webix', './state-router', 'common/$$' ], function (webix, stateRouter,
         route: '/upload-files',
         template: {
             $ui: { rows: [
-                { gravity: .2 },
+                { gravity: .15 },
                 { cols: [ { gravity: .2 }, form, { gravity: .2 } ] },
-                { gravity: .2 }
+                { gravity: .3 }
             ] },
             $oninit: function (view, scope) {
                 $$('file-uploader').addDropZone($$('file-list').$view);
