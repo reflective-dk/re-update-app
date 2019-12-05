@@ -17,7 +17,7 @@ function (webix, stateRouter) {
                 width: 500,
                 value: 'Tryk for udvælgelse af fil, eller træk og slip filen her.',
                 link: "list",
-                upload: "/file-upload",
+                upload: "/app/upload/file",
               },
               {
                 id: "list",
