@@ -16,9 +16,7 @@
   "author": "code@reflective.dk",
   "dependencies": {
     "chai": "^4.1.2",
-    "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
-    "re-client": "git+ssh://git@github.com/reflective-dk/re-client.git",
     "re-common-app": "git+ssh://git@github.com/reflective-dk/re-common-app.git",
     "request": "^2.83.0"
   },

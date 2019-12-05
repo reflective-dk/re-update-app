@@ -1,5 +1,5 @@
 define([ 'webix', './state-router', '../models/situ' ],
-function (webix, stateRouter, situ) {
+function (webix, stateRouter) {
 
   return {
     name: 'upload',
@@ -34,7 +34,7 @@ function (webix, stateRouter, situ) {
       },
       $oninit: function (view, scope) {
         $$("uploader").attachEvent("onFileUpload", function(item, response) {
-          item.name = 'ref: '+response.hash;
+          item.name = 'ref: ' + response.hash;
         });
      }
     },

@@ -3,8 +3,9 @@ requirejs.config({
     paths: {
         common: '../../common/lib',
         app: '../app',
-        webix: '//cdn.webix.com/4.4/webix_debug',
-        axios: '//unpkg.com/axios/dist/axios.min'
+        'es6-promise': '../../common/js/es6-promise.min',
+        webix: '../../common/js/webix_debug',
+        axios: '../../common/js/axios'
     },
     shim: {
         webix: {

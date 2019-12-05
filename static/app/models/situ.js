@@ -23,8 +23,5 @@ function(webix, promise, ReflectiveClient) {
     var args = { context: { domain: domain } };
     client = new ReflectiveClient(args);
     client.authorization = 'Bearer ' + usertoken.token;
-
-    return promise.fcall(function() { return true; });
   }
-
 });
