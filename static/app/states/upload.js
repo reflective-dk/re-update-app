@@ -4,8 +4,9 @@ define([ 'webix', './state-router', 'common/$$' ], function (webix, stateRouter,
         elements: [ {
             template: 'Reflective File Uploader', type:'header'
         }, {
-            view: 'label', label: 'Udvælg filer til upload ved at bruge Vælg-knappen eller trække dem ind nedenfor.',
-            height: 50, align:'center'
+            view: 'label', label: 'Udvælg filer til sikker overførsel ved at bruge Vælg-knappen eller trække dem ind nedenfor.'
+        }, {
+            view: 'label', label: 'De valgte filer overføres ved tryk på Overfør-knappen.'
         }, {
 	    view: 'list',
             id: 'file-list',
@@ -25,7 +26,7 @@ define([ 'webix', './state-router', 'common/$$' ], function (webix, stateRouter,
                 autosend: false
 	    }, {
                 view: 'button',
-                label: 'Send',
+                label: 'Overfør',
                 css: 'webix_primary',
                 height: 40, width: 100,
                 click: function() { $$('file-uploader').send(); }
@@ -45,8 +46,10 @@ define([ 'webix', './state-router', 'common/$$' ], function (webix, stateRouter,
             $oninit: function (view, scope) {
                 $$('file-uploader').addDropZone($$('file-list').$view);
                 $$('file-uploader').attachEvent('onFileUpload', function(item, response) {
-                    console.log('response', response);
-                    item.name = 'ref: ' + response.hash;
+                    if (!item.refAdded) {
+                        item.name += ' — filen er modtaget. Reference-id: ' + response.rid;
+                        item.refAdded = true;
+                    }
                 });
             }
         }
