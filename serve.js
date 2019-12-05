@@ -10,7 +10,7 @@ if (process.argv.length === 3 && process.argv[2] === 'develop') {
   app.use('/app/uploader/static/', express.static('static', {maxAge: 1}));
   app.use('/app/uploader/common/', express.static('node_modules/re-common-app', {maxAge: 1}));
   app.post('/app/uploader/send-files', function(req, res) {
-    var url = host + '/app/upload/file';
+    var url = host + '/app/uploader/send-files';
     req.pipe(request(url)).pipe(res);
   });
   app.get('/app/uploader/', function (request, response) {
