@@ -1,7 +1,12 @@
 define([ 'webix', './state-router', 'common/$$' ], function (webix, stateRouter, $$) {
     var form = {
 	view: 'form',
-        rows: [ {
+        elements: [ {
+            template: 'Reflective File Uploader', type:'header'
+        }, {
+            view: 'label', label: 'Udvælg filer til upload ved at bruge Vælg-knappen eller trække dem ind nedenfor.',
+            height: 50, align:'center'
+        }, {
 	    view: 'list',
             id: 'file-list',
             type: 'uploader',
