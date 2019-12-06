@@ -13,8 +13,12 @@ if (process.argv.length === 3 && process.argv[2] === 'develop') {
     var url = host + '/app/uploader/send-files';
     req.pipe(request(url)).pipe(res);
   });
-  app.get('/app/uploader/', function (request, response) {
-    response.sendFile(indexpath);
+  app.get('/app/uploader', function (request, response) {
+    if (request.url.endsWith('/app/uploader')) {
+      response.redirect('/app/uploader/');
+    } else {
+      response.sendFile(indexpath);
+    }
   });
 
   var host = 'https://test.reflective.dk';
@@ -33,9 +37,12 @@ if (process.argv.length === 3 && process.argv[2] === 'develop') {
     let forwardRequest = request({ url: 'http://process:8080/file-upload', headers: headers });
     uploadRequest.pipe(forwardRequest).pipe(uploadResponse);
   });
-  app.get('/app/uploader/', function (request, response) {
-    response.sendFile(indexpath);
+  app.get('/app/uploader', function (request, response) {
+    if (request.url.endsWith('/app/uploader')) {
+      response.redirect('/app/uploader/');
+    } else {
+      response.sendFile(indexpath);
+    }
   });
 }
-
 app.listen(8080);
